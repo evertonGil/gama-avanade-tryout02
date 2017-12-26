@@ -5,8 +5,16 @@ var fs = require('fs');
 var path = require('path');
 var sys = require('util');
 var exec = require('child_process').exec;
-exec('ng serve --port 8090');
-var url = 'http://localhost:8090';
+exec('ng serve --port 8080', (error, stdout, stderr) => {
+	console.log("algo subiu");
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+});
+var url = 'http://localhost:8080';
 
 describe('Tryout#1 - ', function() {
 
@@ -58,7 +66,7 @@ function layoutTestRunner(assertion_file, width, height) {
 	browser.url(url);
 	browser.waitUntil(function(){
 		return browser.isVisible('#appointment-input') && browser.isVisible('#appointment-submit') && browser.isVisible('.calendar__day.has-event');
-	}, 5000, 'tempo excessivo para carregamento de dados assincronos');
+	}, 50000, 'tempo excessivo para carregamento de dados assincronos');
 	var screenshotName = './screenshot-' + assertion_file + ".png"
 	browser.saveScreenshot(screenshotName);
 	var os = process.platform;

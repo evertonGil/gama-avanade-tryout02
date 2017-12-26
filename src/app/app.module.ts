@@ -6,11 +6,15 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
 import { AppointmentsSeed }  from './appointments.seed';
+import { DateComponent } from './date/date.component';
+import { DateTableComponent } from './date-table/date-table.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DateComponent,
+    DateTableComponent
   ],
   imports: [
     BrowserModule,
