@@ -1,0 +1,13 @@
+<h1 class="current-day">{{dateSelected | moment: 'date'}} <span class="current-day-2">{{dateSelected | moment: 'format': 'dddd' }}</span></h1>
+<div class="asside">
+    <div class="current-events">
+        <h3>Current Events</h3>
+        <ul>
+            <li>never forget</li>
+        </ul>
+    </div>
+    <form id="add-appointment">
+        <input type="text" name="" id="appointment-input" placeholder="Create on Event">
+        <button id="appointment-submit"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+    </form>
+</div>

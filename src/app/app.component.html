@@ -1,18 +1,6 @@
 <div class="container calendar-app">
     <div class="box-left">
-        <h1 class="current-day">18 <span class="current-day-2">MONDAY</span></h1>
-        <div class="asside">
-            <div class="current-events">
-                <h3>Current Events</h3>
-                <ul>
-                    <li>never forget</li>
-                </ul>
-            </div>
-            <form id="add-appointment">
-                <input type="text" name="" id="appointment-input" placeholder="Create on Event">
-                <button id="appointment-submit"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
-            </form>
-        </div>
+        <app-appointments [dateSelected]="date" ></app-appointments>
     </div>
     <div class="box-right">
         <div class="month-year">
@@ -20,6 +8,8 @@
             December/17
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
-        <app-date-table></app-date-table>
+        <app-date-table [dateSelected]="date"></app-date-table>
+        <!--<p>{{date}}</p>
+        <input type="date" name="data" id="" [(ngModel)]="date"  >-->
     </div>
 </div>

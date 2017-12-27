@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SelectedDateService } from './selected-date.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
+  @Input() date: Date =  new Date(2017,11,18);
+  
+  constructor(public selectedDateService: SelectedDateService){
+    
+  }
+
 }
