@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Appointment } from '../Appointment';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { AppointmentsService } from '../appointments.service';
-import { SelectedDateService } from '../selected-date.service';
+import { Appointment } from '../Appointment';
+import { AppComponent } from '../app.component';
 import { MomentPipe } from '../moment.pipe';
 import * as moment  from 'moment';
 
@@ -12,27 +12,36 @@ import * as moment  from 'moment';
 })
 export class AppointmentsComponent implements OnInit {
   
-  @Input() dateSelected = moment(this.dateSelected);
+  @Input() dateSelected;
+  @Input() appAppointments: Array<any>;
+  private appointments: Appointment[];
 
-  dateMoment;
 
-  constructor(private appointmentService : AppointmentsService, private selectedDate: SelectedDateService) {
-    console.log("teste", this.dateSelected);
-    this.dateMoment = moment(this.dateSelected);
-   }
+  constructor(private appointmentsService : AppointmentsService,private appComponent :AppComponent ) {   }
 
-  ngOnInit() {
+  ngOnInit() {  }
+
+  ngOnChanges(changes){
+    console.log('changes: ', changes);
+
     
+    if(this.appAppointments){
+      let clone = [].concat(this.appAppointments);
+      
+      //console.log('clone', clone);
+
+      this.appointments = clone.filter((value, index, Array) => {
+        return moment(value.date).format("X") == this.dateSelected.format("X");
+      })
+    }
   }
 
-  getAppointments(): Appointment[]{
-    let appoin;
+  
 
-    this.appointmentService.getAppointments().subscribe(appointments => appoin = appointments );
-    
-    return appoin;
+  add(appointmentTitulo){
+    if(!appointmentTitulo) return;
+
+    this.appComponent.addOneAppointment(appointmentTitulo);
   }
-
-
 
 }

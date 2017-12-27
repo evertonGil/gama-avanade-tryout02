@@ -1,0 +1,77 @@
+.month-year{
+    float: right;
+    font-weight: bold;
+    font-size:12px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    line-height: 1em;
+    color: #9a9aa0;
+}
+.month-year:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.month-year i{
+    cursor: pointer;
+}
+.title-month-year{
+    width: 85px;
+    display: inline-block;
+    justify-content: center;
+}
+.calendar{
+    clear: both;
+    width: 100%;
+    border-top:1px solid #999999;
+    margin-top: 24px;
+}
+.calendar thead td{
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: -0.3px;
+    padding: 18px 0px 9px 0px;
+}    
+.calendar td{
+    text-align: center;
+}
+.calendar__day{
+    font-size: 12px;
+    letter-spacing: -0.3px;
+    width: 32px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 5px auto 0 auto;
+    cursor: pointer;
+}
+
+.calendar__day.current{
+    background: #890a78;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+}    
+.calendar__day.other-mount{
+    color: #9d9d9d;
+}
+.calendar__day.has-event:before{
+    content: "";
+    display: block;
+    background: #890a78;
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+@media (max-width: 600px ){
+    .box-right{
+        width: 100%;
+        height: 384px;
+    }
+}

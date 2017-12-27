@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Appointment } from '../Appointment';
 import { AppointmentsService } from '../appointments.service';
 import { SelectedDateService } from '../selected-date.service';
@@ -6,85 +6,85 @@ import { AppComponent } from '../app.component';
 import {  } from '@angular/formControl';
 
 import * as moment  from 'moment';
+import { SimpleChange } from '@angular/core/src/change_detection/change_detection_util';
 
 @Component({
   selector: 'app-date-table',
   templateUrl: './date-table.component.html',
   styleUrls: ['./date-table.component.css']
 })
-export class DateTableComponent implements OnInit {
+export class DateTableComponent implements OnInit, OnChanges {
   
-  @Input() dateSelected: Date;
-
-  start = this._removeTime(moment().date(0));
-  month;
-  appointmentsDb: any[];
-  teste = '2';
-  _calendario;
-  weeks = [];
+  @Input() dateSelected;
+  @Input() appAppointments: Array<any>;
+  appAppointments2: Array<any>;
+  private _start; 
+  private _actualMonth;
+  private _appointmentsDb: any[];
+  protected _calendario;
 
 
   constructor(
     private appointmentService : AppointmentsService, 
-    public appComponent: AppComponent
-  ) {
+    public appComponent: AppComponent,
+  ) { }
 
-    this.appointmentService.getAppointments()
-    .subscribe(appointments => {
+  ngOnInit() {  
+    
+  }
+  ngOnChanges(changes){
 
-        this.month = moment().date(this.dateSelected.getDate());
-        this.appointmentsDb = appointments.map(Appointment =>  moment(Appointment.date).format("X"));
-        this._calendario = this._buildMonth(this.start.clone(), this.month.clone(), this.appointmentsDb);
-    });
-   }
+    if(this.appAppointments){
+      console.log("teste", this.appAppointments);
+      this.appAppointments2 = [].concat(this.appAppointments.map(Appointment => moment(Appointment.date).format("X")));
 
-  ngOnInit() {    
-      console.log('date-table', this.dateSelected);
+      this.atualizaLista();
+    }
+  }
 
-      
+  atualizaLista(){
     
+    this._start = this._removeTime(moment(this.dateSelected).date(0));
+    this._actualMonth = this.dateSelected; 
     
-    
-    
+    this._calendario = this._buildMonth(this._start, this._actualMonth.month(), this.appAppointments2);
 
   }
 
- 
-
+  _removeTime(date) {
+      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
+  }
+  
   _buildMonth(start, month, appointments) {
-     this.weeks = [];
+      let weeks = [];
       var done = false, 
       date = start.clone(), 
       monthIndex = date.month(), 
       count = 0;
 
-      console.log(this.dateSelected , this.start.format("DD-MM-YYY"), this.month.month())
-
       while (!done) {
-          this.weeks.push({ days: this._buildWeek(date, month, appointments), week: date.week(), monthIndex: monthIndex,  mes: date.month() });
+          weeks.push({ days: this._buildWeek(date, month, appointments)});
 
           date.add(1, "w");
           
           done = count++ > 2 && monthIndex !== date.month();
           monthIndex = date.month();
       }
-
-      console.log(this.weeks);
-      return this.weeks;
+      return weeks;
   }
 
-  _removeTime(date) {
-      return date.day(0).hour(0).minute(0).second(0).millisecond(0);
-  }
+ 
 
   _buildWeek(date, month, appointments: any[]) {
     var days = [];
+    
 
     for (var i = 0; i < 7; i++) {
+
         days.push({
             name: date.format("dddd"),
             number: date.date(),
-            isCurrentMonth: date.month() === month.month(),
+            isCurrentMonth: date.month() === month,
             DaySelected: date.isSame(this.dateSelected, "day"),
             date: date.clone(),
             hasAppointment: appointments.includes(date.format("X"))
@@ -93,17 +93,16 @@ export class DateTableComponent implements OnInit {
         date = date.clone();
         date.add(1, "d");
     }
-    return days;
-      
+    return days;  
   }
 
-  next(){
-    
-    this._calendario = this._buildMonth(this.start.clone(), this.month.clone(), this.appointmentsDb);
+  prev(day){
+    this.appComponent.date = day.subtract(1, 'M');
+  }
+  next(day){
+    this.appComponent.date = day.add(1, 'M');
   }
   selectDate(day){
-    this.appComponent.date = new Date(day.date.format("YYYY, MM, DD"));
-    this._calendario = this._buildMonth(this.start.clone(), this.month.clone(), this.appointmentsDb);
+    this.appComponent.date = day.date;
   }
-
 }

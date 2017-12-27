@@ -1,14 +1,9 @@
 <div class="container calendar-app">
     <div class="box-left">
-        <app-appointments [dateSelected]="date" ></app-appointments>
+       <app-appointments [dateSelected]="date" [appAppointments]="appointments" class="app-appointments" ></app-appointments>
     </div>
     <div class="box-right">
-        <div class="month-year">
-            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-            December/17
-            <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </div>
-        <app-date-table [dateSelected]="date"></app-date-table>
+        <app-date-table [dateSelected]="date" [appAppointments]="appointments"></app-date-table>
         <!--<p>{{date}}</p>
         <input type="date" name="data" id="" [(ngModel)]="date"  >-->
     </div>

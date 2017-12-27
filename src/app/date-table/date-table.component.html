@@ -1,3 +1,8 @@
+<div class="month-year">
+    <i class="fa fa-chevron-left" aria-hidden="true" (click)="prev(dateSelected.clone())" ></i>
+    <span class="title-month-year" >{{dateSelected.format("MMMM")}}/{{dateSelected.format("YY")}}</span>
+    <i class="fa fa-chevron-right" aria-hidden="true" (click)="next(dateSelected.clone())" ></i>
+</div>
 <table class="calendar">
     <thead>
         <tr>
