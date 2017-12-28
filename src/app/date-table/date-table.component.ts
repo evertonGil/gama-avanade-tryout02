@@ -35,7 +35,6 @@ export class DateTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes){
 
     if(this.appAppointments){
-      console.log("teste", this.appAppointments);
       this.appAppointments2 = [].concat(this.appAppointments.map(Appointment => moment(Appointment.date).format("X")));
 
       this.atualizaLista();

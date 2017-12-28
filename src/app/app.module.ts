@@ -12,6 +12,8 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { SelectedDateService } from './selected-date.service';
 import { FormsModule} from '@angular/forms';
 import { MomentPipe } from './moment.pipe';
+import { MessageService } from './message.service';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { MomentPipe } from './moment.pipe';
     DateTableComponent,
     AppointmentsComponent,
     MomentPipe,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { MomentPipe } from './moment.pipe';
       AppointmentsSeed, { dataEncapsulation: false }
     )
   ],
-  providers: [AppointmentsService, SelectedDateService],
+  providers: [AppointmentsService, SelectedDateService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

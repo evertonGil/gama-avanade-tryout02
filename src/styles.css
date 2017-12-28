@@ -16,13 +16,15 @@ body::-webkit-scrollbar {
 
 .container{
     max-width: 600px;
-    margin: 125px auto;
+    margin: 0 auto;    
 }
 .calendar-app{
     border-radius: 15px;
     overflow: hidden;
     display: flex;
     background: #ffffff;
+    margin-top: 125px;
+    position: relative;
 }
 .box-left{
     width: 244px;

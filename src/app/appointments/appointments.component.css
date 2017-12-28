@@ -25,6 +25,7 @@
     padding: 0 0 0 0px;
     line-height: 0em;
     margin-left: auto;
+    cursor: pointer;
 }
 .current-day{
     font-weight: bold;

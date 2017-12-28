@@ -1,0 +1,6 @@
+<div *ngIf="messageService.messages" class="messages">
+  <div class="alert" *ngFor="let message of messageService.messages; let i = index">
+    {{message}}
+    <i class="fa fa-close" aria-hidden="true" (click)="messageService.delete(i)" ></i>
+  </div>
+</div>
