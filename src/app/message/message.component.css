@@ -14,6 +14,10 @@
     font-size: 10px;
     text-align: right;
 }
+.alert.warning{
+    background: rgba(233, 27, 27, 0.8); 
+    color: #fff;
+}
 .fa-close{
     margin-left: 5px;
     cursor: pointer;

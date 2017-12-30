@@ -6,7 +6,7 @@
             <li *ngFor="let appointment of appointments" >{{appointment.title}}</li>
         </ul>
     </div>
-    <form id="add-appointment">
+    <form id="add-appointment" [@appointmentState]="state" (@appointmentState.done)="resetState($event)">
         <input type="text" name="" id="appointment-input" placeholder="Create on Event" #appointmentTitulo >
         <button id="appointment-submit" (click)="add(appointmentTitulo.value); appointmentTitulo.value=''"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
     </form>

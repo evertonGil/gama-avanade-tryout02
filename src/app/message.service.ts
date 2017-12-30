@@ -3,12 +3,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MessageService {
 
-  messages: string[] = [];
+  messages: object[] = [];
 
-  add(message: string) {
+  add(message: string, messageType: string) {
+    let obj = {
+      text: message,
+      type: messageType
+    };
 
-    this.messages.push(message);
-    setTimeout(() => this.delete(this.messages.lastIndexOf(message)) , 4000);
+    this.messages.push(obj);
+    setTimeout(() => this.delete(this.messages.lastIndexOf(obj)) , 4000);
   }
   delete(i){
     this.messages.splice(i, 1);
